@@ -15,21 +15,26 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { getGoogleProfile } from "@/utils/google";
 
 import IconGoogle from "@/assets/icon/google-color-svgrepo-com.svg";
+import { useLoginGoogleMutation } from "@/redux/api/auth.api";
+import { LoginGoogleRequest } from "@/dto/request/auth.request";
 
 
 
 const BoxLogin: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string>("");
+  const [data, setData] = useState<any>(null);
 
   const isMobile = useMediaQuery(`(max-width: ${564}px)`);
+  const [ login ] = useLoginGoogleMutation();
 
-  const login = useGoogleLogin({
-    onSuccess: res => {
-      console.log("Res:", res);
-      setAccessToken(res.access_token);
+  const loginGoogle = useGoogleLogin({
+    onSuccess: data => {
+      setAccessToken(data.access_token);
+      setData(data);
     },
-    onError: (error) => {
-      console.log("Error:", error);
+    onError: () => {
+      setAccessToken("");
+      setData(null);
     },
     flow: 'implicit',
     scope: 'profile email',
@@ -37,7 +42,8 @@ const BoxLogin: React.FC = () => {
 
   const handleLogin = async () => {
     const result = await getGoogleProfile(accessToken);
-    console.log(result);
+    const res = await login(result as LoginGoogleRequest);
+    console.log(res);
   }
 
   useEffect(() => {
@@ -95,7 +101,7 @@ const BoxLogin: React.FC = () => {
         <Button
           w={"100%"}
           variant="outline"
-          onClick={() => login()}
+          onClick={() => loginGoogle()}
           leftSection={<Image height={18} width={18} src={IconGoogle} />}
           style={{
             backgroundColor: "#fff !important",

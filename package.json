@@ -17,6 +17,7 @@
     "@mantine/modals": "^7.5.3",
     "@mantine/notifications": "^7.5.3",
     "@mantine/tiptap": "^7.5.3",
+    "@react-oauth/google": "^0.12.1",
     "@tabler/icons-react": "^2.47.0",
     "@tiptap/extension-link": "^2.2.4",
     "@tiptap/react": "^2.2.4",

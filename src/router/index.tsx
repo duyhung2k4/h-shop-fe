@@ -1,19 +1,16 @@
-import React, { Suspense } from "react";
+import React from "react";
+import AuthLayout from "./layout/auth";
 import { Routes, Route } from "react-router";
 import { PageDashboard, PageLogin } from "./lazy";
-import { LoadingOverlay } from "@mantine/core";
-import AuthComponent from "./auth";
 
 const AppRouter: React.FC = () => {
   return (
-    <Suspense fallback={<LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }} />}>
-      <Routes>
-        <AuthComponent>
-          <Route path="/login" element={<PageLogin />} />
-          <Route path="/" element={<PageDashboard />} />
-        </AuthComponent>
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<PageLogin />} />
+        <Route path="/" element={<PageDashboard />} />
+      </Route>
+    </Routes>
   )
 }
 

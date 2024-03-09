@@ -17,12 +17,15 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { getGoogleProfile } from "@/utils/google";
 import { useLoginGoogleMutation } from "@/redux/api/auth.api";
 import { LoginGoogleRequest } from "@/dto/request/auth.request";
-
+import { useNotification } from "@/hook/notification.hook";
+import { useNavigate } from "react-router";
 
 
 const Login: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string>("");
   const [_, setData] = useState<any>(null);
+  const noti = useNotification();
+  const navigation = useNavigate();
 
   const isMobile = useMediaQuery(`(max-width: ${564}px)`);
   const [login] = useLoginGoogleMutation();
@@ -43,7 +46,14 @@ const Login: React.FC = () => {
   const handleLogin = async () => {
     const result = await getGoogleProfile(accessToken);
     const res = await login(result as LoginGoogleRequest);
-    console.log(res);
+    
+    if ("error" in res) {
+      noti.error("Đăng nhập thất bại");
+      return;
+    }
+
+    noti.success("Đăng nhập thành công");
+    navigation("/");
   }
 
   useEffect(() => {

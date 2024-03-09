@@ -10,22 +10,22 @@ import {
   Image,
   PasswordInput
 } from "@mantine/core";
+import IconGoogle from "@/assets/icon/google-color-svgrepo-com.svg";
+
 import { useMediaQuery } from "@mantine/hooks";
 import { useGoogleLogin } from '@react-oauth/google';
 import { getGoogleProfile } from "@/utils/google";
-
-import IconGoogle from "@/assets/icon/google-color-svgrepo-com.svg";
 import { useLoginGoogleMutation } from "@/redux/api/auth.api";
 import { LoginGoogleRequest } from "@/dto/request/auth.request";
 
 
 
-const BoxLogin: React.FC = () => {
+const Login: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string>("");
-  const [data, setData] = useState<any>(null);
+  const [_, setData] = useState<any>(null);
 
   const isMobile = useMediaQuery(`(max-width: ${564}px)`);
-  const [ login ] = useLoginGoogleMutation();
+  const [login] = useLoginGoogleMutation();
 
   const loginGoogle = useGoogleLogin({
     onSuccess: data => {
@@ -47,14 +47,14 @@ const BoxLogin: React.FC = () => {
   }
 
   useEffect(() => {
-    if(accessToken.length > 0) {
+    if (accessToken.length > 0) {
       handleLogin();
     }
   }, [accessToken]);
 
   return (
     <Group
-      h={"100%"}
+      h={"100vh"}
       w={"100%"}
       align="center"
       justify="center"
@@ -115,4 +115,4 @@ const BoxLogin: React.FC = () => {
   )
 }
 
-export default BoxLogin;
+export default Login;

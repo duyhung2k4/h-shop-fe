@@ -14,6 +14,12 @@ export const authApi = createApi({
         ...endPoint.auth.loginGoogle(),
         data: payload,
       }),
+    }),
+    refreshToken: builder.mutation<QueryReturnType<AuthResponse>, null>({
+      query: (payload) => ({
+        ...endPoint.auth.refreshToken(),
+        data: payload,
+      }),
     })
   })
 });

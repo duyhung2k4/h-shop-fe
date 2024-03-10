@@ -26,4 +26,5 @@ export const authApi = createApi({
 
 export const {
   useLoginGoogleMutation,
+  useRefreshTokenMutation,
 } = authApi;

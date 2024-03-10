@@ -8,7 +8,8 @@ import {
   TextInput,
   Title,
   Image,
-  PasswordInput
+  PasswordInput,
+  LoadingOverlay
 } from "@mantine/core";
 import IconGoogle from "@/assets/icon/google-color-svgrepo-com.svg";
 
@@ -28,7 +29,7 @@ const Login: React.FC = () => {
   const navigation = useNavigate();
 
   const isMobile = useMediaQuery(`(max-width: ${564}px)`);
-  const [login] = useLoginGoogleMutation();
+  const [login, { isLoading }] = useLoginGoogleMutation();
 
   const loginGoogle = useGoogleLogin({
     onSuccess: data => {
@@ -70,6 +71,7 @@ const Login: React.FC = () => {
       justify="center"
       bg={"#e0e0e0"}
     >
+      <LoadingOverlay pos="relative" visible={isLoading} overlayProps={{ blur: 2, radius: "sm" }} />
       <Stack
         align="center"
         justify="center"

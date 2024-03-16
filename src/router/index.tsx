@@ -1,8 +1,9 @@
 import React from "react";
-import AuthLayout from "./layout/auth";
+import AuthLayout from "../layout/auth";
 import { Routes, Route } from "react-router";
 import { PageDashboard, PageLogin } from "./lazy";
-import ProtectedLayout from "./layout/protected";
+import ProtectedLayout from "../layout/protected";
+import AppshellLayout from "@/layout/appShell";
 
 const AppRouter: React.FC = () => {
   return (
@@ -11,7 +12,9 @@ const AppRouter: React.FC = () => {
         <Route path="/login" element={<PageLogin />} />
 
         <Route element={<ProtectedLayout/>}>
-          <Route path="/" element={<PageDashboard />} />
+          <Route element={<AppshellLayout/>}>
+            <Route path="/" element={<PageDashboard />} />
+          </Route>
         </Route>
       </Route>
     </Routes>

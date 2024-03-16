@@ -24,12 +24,13 @@ import { useNavigate } from "react-router";
 
 const Login: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [_, setData] = useState<any>(null);
   const noti = useNotification();
   const navigation = useNavigate();
 
   const isMobile = useMediaQuery(`(max-width: ${564}px)`);
-  const [login, { isLoading }] = useLoginGoogleMutation();
+  const [login] = useLoginGoogleMutation();
 
   const loginGoogle = useGoogleLogin({
     onSuccess: data => {
@@ -45,8 +46,10 @@ const Login: React.FC = () => {
   });
 
   const handleLogin = async () => {
+    setLoading(true);
     const result = await getGoogleProfile(accessToken);
     const res = await login(result as LoginGoogleRequest);
+    setLoading(false);
     
     if ("error" in res) {
       noti.error("Đăng nhập thất bại");
@@ -71,7 +74,7 @@ const Login: React.FC = () => {
       justify="center"
       bg={"#e0e0e0"}
     >
-      <LoadingOverlay pos="relative" visible={isLoading} overlayProps={{ blur: 2, radius: "sm" }} />
+      <LoadingOverlay visible={loading} overlayProps={{ blur: 2, radius: "sm" }} />
       <Stack
         align="center"
         justify="center"

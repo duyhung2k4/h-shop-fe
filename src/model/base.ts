@@ -1,6 +1,6 @@
 export type BaseModel = {
-  id: number
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
+  ID: number
+  CreatedAt?: Date | string
+  UpdatedAt?: Date | string
+  DeletedAt?: Date | string
 }

@@ -39,6 +39,11 @@ export const endPoint = {
             url: "shop/api/v1/protected/shop",
             method: "POST",
             headers: HEADER.protectedHeader(),
+        }),
+        checkDuplicate: () => ({
+            url: "shop/api/v1/protected/shop/check-duplicate",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
         })
     }
 }

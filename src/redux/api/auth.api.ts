@@ -6,25 +6,25 @@ import { AuthResponse } from "@/dto/response/auth.response";
 import { LoginGoogleRequest } from "@/dto/request/auth.request";
 
 export const authApi = createApi({
-  reducerPath: "authApi",
-  baseQuery: axiosBaseQuery(),
-  endpoints: (builder) => ({
-    loginGoogle: builder.mutation<QueryReturnType<AuthResponse>, LoginGoogleRequest>({
-      query: (payload) => ({
-        ...endPoint.auth.loginGoogle(),
-        data: payload,
-      }),
-    }),
-    refreshToken: builder.mutation<QueryReturnType<AuthResponse>, null>({
-      query: (payload) => ({
-        ...endPoint.auth.refreshToken(),
-        data: payload,
-      }),
+    reducerPath: "authApi",
+    baseQuery: axiosBaseQuery(),
+    endpoints: (builder) => ({
+        loginGoogle: builder.mutation<QueryReturnType<AuthResponse>, LoginGoogleRequest>({
+            query: (payload) => ({
+                ...endPoint.auth.loginGoogle(),
+                data: payload,
+            }),
+        }),
+        refreshToken: builder.mutation<QueryReturnType<AuthResponse>, null>({
+            query: (payload) => ({
+                ...endPoint.auth.refreshToken(),
+                data: payload,
+            }),
+        })
     })
-  })
 });
 
 export const {
-  useLoginGoogleMutation,
-  useRefreshTokenMutation,
+    useLoginGoogleMutation,
+    useRefreshTokenMutation,
 } = authApi;

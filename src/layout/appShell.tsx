@@ -1,8 +1,9 @@
-import React, { createContext } from "react";
-import { AppShell, Skeleton } from '@mantine/core';
+import React, { createContext, Suspense } from "react";
+import { AppShell, LoadingOverlay } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useOutlet } from "react-router";
 import AppHeader from "@/components/header";
+import AppNavbar from "@/components/navbar";
 
 export type AppShellContextType = {
   mobileOpened: boolean
@@ -20,7 +21,7 @@ export const AppShellContext = createContext<AppShellContextType>({
 
 const AppshellLayout: React.FC = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
+  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   const outlet = useOutlet();
 
   return (
@@ -35,7 +36,7 @@ const AppshellLayout: React.FC = () => {
       <AppShell
         header={{ height: 60 }}
         navbar={{
-          width: 300,
+          width: 230,
           breakpoint: 'sm',
           collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
         }}
@@ -44,14 +45,14 @@ const AppshellLayout: React.FC = () => {
         <AppShell.Header>
           <AppHeader/>
         </AppShell.Header>
-        <AppShell.Navbar p="md">
-          {Array(15)
-            .fill(0)
-            .map((_, index) => (
-              <Skeleton key={index} h={28} mt="sm" animate={false} />
-            ))}
+        <AppShell.Navbar p={0}>
+            <AppNavbar/>
         </AppShell.Navbar>
-        <AppShell.Main>{outlet}</AppShell.Main>
+        <AppShell.Main>
+            <Suspense fallback={<LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }}/>}>
+                {outlet}
+            </Suspense>
+        </AppShell.Main>
         <AppShell.Footer p="md">Footer</AppShell.Footer>
       </AppShell>
     </AppShellContext.Provider>

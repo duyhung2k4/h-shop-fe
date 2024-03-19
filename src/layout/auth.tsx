@@ -25,7 +25,7 @@ const AuthLayout: React.FC = () => {
   }, [accessToken, refreshToken]);
 
   return (
-    <Suspense fallback={<LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }} />}>
+    <Suspense fallback={<LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }}/>}>
       {outlet}
     </Suspense>
   )

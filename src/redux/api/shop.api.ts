@@ -9,6 +9,11 @@ export const shopApi = createApi({
     reducerPath: "shopApi",
     baseQuery: axiosBaseQuery(),
     endpoints: (builder) => ({
+        getShop: builder.query<QueryReturnType<ShopModel>, null>({
+            query: () => ({
+                ...endPoint.shop.getShop(),
+            })
+        }),
         createShop: builder.mutation<QueryReturnType<ShopModel>, ShopRequest>({
             query: (payload) => ({
                 ...endPoint.shop.createShop(),

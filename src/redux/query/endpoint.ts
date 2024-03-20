@@ -35,6 +35,11 @@ export const endPoint = {
         })
     },
     shop: {
+        getShop: () => ({
+            url: "shop/api/v1/protected/shop",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
         createShop: () => ({
             url: "shop/api/v1/protected/shop",
             method: "POST",

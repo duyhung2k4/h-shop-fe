@@ -50,5 +50,5 @@ export const endPoint = {
             method: "GET",
             headers: HEADER.protectedHeader(),
         })
-    }
+    },
 }

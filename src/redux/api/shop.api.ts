@@ -25,7 +25,7 @@ export const shopApi = createApi({
                 ...endPoint.shop.checkDuplicate(),
                 params: payload,
             }),
-        })
+        }),
     })
 });
 

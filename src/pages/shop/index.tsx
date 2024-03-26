@@ -1,32 +1,65 @@
-import { useCreateShopMutation } from "@/redux/api/shop.api";
-import { Button, Group, Input } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+
+import { useGetShopQuery } from "@/redux/api/shop.api";
+import { 
+    Button, 
+    Group, 
+    Image, 
+    LoadingOverlay, 
+    Stack, 
+    Text
+} from "@mantine/core";
+
+import IconEmptyData from "@/assets/icon/empty-box-svgrepo-com.svg";
+import { useNavigate } from "react-router";
 
 const Shop: React.FC = () => {
-    const [post, { isLoading }] = useCreateShopMutation();
-    const [name, setName] = useState<string>("");
 
-    const handleCreate = async () => {
-        const res = await post({
-            name: name,
-            address: "thanh hoa",
-        });
+    const navigation = useNavigate();
 
-        console.log(res);
+    const {
+        data: shops,
+        refetch,
+        isFetching,
+    } = useGetShopQuery(null);
+
+    useEffect(() => {
+        refetch();
+    }, []);
+
+    if (isFetching) {
+        return (
+            <LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }} />
+        )
+    }
+
+    if ((shops?.data || []).length === 0) {
+        return (
+            <Stack
+                justify="center"
+                align="center"
+                h={"100%"}
+                w={"100%"}
+            >
+                <Text>Bạn chưa có cửa hàng nào</Text>
+                <Group
+                    h={"auto"}
+                    w={"20%"}
+                    justify="center"
+                >
+                    <Image src={IconEmptyData} />
+                </Group>
+                <Button onClick={() => navigation("/me/shop/create")}>Tạo mới</Button>
+            </Stack>
+        )
     }
 
     return (
-        <Group>
-            <Input 
-                placeholder="name" 
-                value={name} 
-                onChange={ e => setName(e.target.value)}
-            />
-            <Button
-                onClick={handleCreate}
-                loading={isLoading}
-            >Create</Button>
-        </Group>
+        <Stack>
+            <Group justify="end">
+                <Button onClick={() => navigation("/me/shop/create")}>Tạo mới shop</Button>
+            </Group>
+        </Stack>
     )
 }
 

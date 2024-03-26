@@ -6,7 +6,9 @@ import AppshellLayout from "@/layout/appShell";
 import { Routes, Route } from "react-router";
 
 import { 
+    PageCreateShop,
     PageDashboard, 
+    PageDetailShop, 
     PageLogin, 
     PageNotFound, 
     PageShop, 
@@ -22,6 +24,8 @@ const AppRouter: React.FC = () => {
           <Route element={<AppshellLayout/>}>
             <Route path="/" element={<PageDashboard />} />
             <Route path="/me/shop" element={<PageShop />} />
+            <Route path="/me/shop/:shop_id" element={<PageDetailShop />} />
+            <Route path="/me/shop/create" element={<PageCreateShop />} />
           </Route>
         </Route>
 

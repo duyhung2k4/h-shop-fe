@@ -32,4 +32,5 @@ export const shopApi = createApi({
 export const {
     useCreateShopMutation,
     useCheckDuplicateQuery,
+    useGetShopQuery,
 } = shopApi;

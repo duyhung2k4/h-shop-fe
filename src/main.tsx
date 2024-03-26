@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <MantineProvider theme={themeOverride}>
       <BrowserRouter>
         <GoogleOAuthProvider
-          clientId="75914166479-fdqjore6k159q67c67aajshe5tj7h8gb.apps.googleusercontent.com"
+          clientId="75914166479-8gcteq1kja0oh6bhruuq1769n8sbfkoa.apps.googleusercontent.com"
         >
           <Notifications />
           <App />

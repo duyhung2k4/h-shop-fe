@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./reducer";
 import { authApi } from "./api/auth.api";
 import { shopApi } from "./api/shop.api";
+import { typeProductApi } from "./api/typeProduct.api";
 
 const middleware = [
   authApi.middleware,
   shopApi.middleware,
+  typeProductApi.middleware,
 ]
 
 const store = configureStore({

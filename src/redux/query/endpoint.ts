@@ -51,4 +51,16 @@ export const endPoint = {
             headers: HEADER.protectedHeader(),
         })
     },
+    typeProduct: {
+        getTypeProduct: () => ({
+            url: "shop/api/v1/protected/type-product",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+        createTypeProduct: () => ({
+            url: "shop/api/v1/protected/type-product",
+            method: "POST",
+            headers: HEADER.protectedHeader(),
+        })
+    }
 }

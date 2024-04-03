@@ -1,17 +1,20 @@
 import React, { useEffect } from "react";
 
 import { useGetShopQuery } from "@/redux/api/shop.api";
-import { 
-    Button, 
-    Group, 
-    Image, 
-    LoadingOverlay, 
-    Stack, 
+import {
+    Button,
+    Grid,
+    Group,
+    Image,
+    LoadingOverlay,
+    Stack,
     Text
 } from "@mantine/core";
 
 import IconEmptyData from "@/assets/icon/empty-box-svgrepo-com.svg";
 import { useNavigate } from "react-router";
+import CardShop from "./card";
+import { ShopModel } from "@/model/shop";
 
 const Shop: React.FC = () => {
 
@@ -59,6 +62,15 @@ const Shop: React.FC = () => {
             <Group justify="end">
                 <Button onClick={() => navigation("/me/shop/create")}>Tạo mới shop</Button>
             </Group>
+            <Grid>
+                    {
+                        (shops?.data || []).map((shop: ShopModel) =>
+                            <Grid.Col span={{ xs: 12, md: 4, lg: 3 }}>
+                                <CardShop {...shop} />
+                            </Grid.Col>
+                        )
+                    }
+            </Grid>
         </Stack>
     )
 }

@@ -40,7 +40,6 @@ const AppshellLayout: React.FC = () => {
           breakpoint: 'sm',
           collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
         }}
-        footer={{ height: 60 }}
         padding="md"
       >
         <AppShell.Header>
@@ -54,7 +53,6 @@ const AppshellLayout: React.FC = () => {
                 {outlet}
             </Suspense>
         </AppShell.Main>
-        <AppShell.Footer p="md">Footer</AppShell.Footer>
       </AppShell>
     </AppShellContext.Provider>
   )

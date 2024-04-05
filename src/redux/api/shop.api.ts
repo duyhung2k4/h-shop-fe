@@ -14,6 +14,14 @@ export const shopApi = createApi({
                 ...endPoint.shop.getShop(),
             })
         }),
+        getDetailShop: builder.query<QueryReturnType<ShopModel>, number>({
+            query: (payload) => ({
+                ...endPoint.shop.getDetailShop(),
+                params: {
+                    shopId: payload,
+                }
+            })
+        }),
         createShop: builder.mutation<QueryReturnType<ShopModel>, ShopRequest>({
             query: (payload) => ({
                 ...endPoint.shop.createShop(),
@@ -33,4 +41,5 @@ export const {
     useCreateShopMutation,
     useCheckDuplicateQuery,
     useGetShopQuery,
+    useGetDetailShopQuery,
 } = shopApi;

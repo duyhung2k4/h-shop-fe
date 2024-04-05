@@ -1,21 +1,33 @@
-import { useAppSelector } from "@/redux/hook";
-import { RootState } from "@/redux/store";
-import { Group, Text } from "@mantine/core";
-import React from "react";
+import React, { useEffect } from "react";
+import { useGetDetailShopQuery } from "@/redux/api/shop.api";
+import { Group, LoadingOverlay, Text } from "@mantine/core";
 import { useNavigate, useParams } from "react-router";
 
 const ShopDetail: React.FC = () => {
     const { shop_id } = useParams();
     const navigation = useNavigate();
-    const profile = useAppSelector((state: RootState) => state.authSlice.profile);
 
-    if(shop_id === undefined || profile === undefined) {
+    if(shop_id === undefined) {
         navigation("/me/shop/not-found");
+    }
+
+    const {
+        data,
+        refetch,
+        isLoading
+    } = useGetDetailShopQuery(Number(shop_id || 0))
+
+    useEffect(() => {
+        refetch();
+    }, []);
+
+    if(isLoading) {
+        return <LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }} />
     }
 
     return (
         <Group>
-            <Text>Shop {shop_id} của {profile?.name}</Text>
+            <Text>{data?.data?.name || ""}</Text>
         </Group>
     )
 }

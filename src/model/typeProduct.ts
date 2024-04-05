@@ -5,5 +5,5 @@ export type TypeProductModel = BaseModel & {
     shopId: number
     hastag: string
     name: string
-    Shop?: ShopModel
+    shop?: ShopModel
 }

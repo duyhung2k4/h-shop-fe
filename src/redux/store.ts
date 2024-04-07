@@ -3,11 +3,13 @@ import { rootReducer } from "./reducer";
 import { authApi } from "./api/auth.api";
 import { shopApi } from "./api/shop.api";
 import { typeProductApi } from "./api/typeProduct.api";
+import { productApi } from "./api/product.api";
 
 const middleware = [
   authApi.middleware,
   shopApi.middleware,
   typeProductApi.middleware,
+  productApi.middleware,
 ]
 
 const store = configureStore({

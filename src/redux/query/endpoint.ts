@@ -67,5 +67,12 @@ export const endPoint = {
             method: "POST",
             headers: HEADER.protectedHeader(),
         })
+    },
+    product: {
+        createProduct: () => ({
+            url: "product/api/v1/protected/product",
+            method: "POST",
+            headers: HEADER.protectedHeader(),
+        })
     }
 }

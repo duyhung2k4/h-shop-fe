@@ -5,10 +5,10 @@ import { useNavigate, useParams } from "react-router";
 import { IconLayoutGridAdd, IconSettings } from "@tabler/icons-react";
 import { useMediaQuery } from "@mantine/hooks";
 
-const ShopDetail: React.FC = () => {
+const DetailShop: React.FC = () => {
     const { shop_id } = useParams();
     const navigation = useNavigate();
-    const matches = useMediaQuery("(max-width: 768px)")
+    const matches = useMediaQuery("(max-width: 964px)");
 
     if (shop_id === undefined) {
         navigation("/me/shop/not-found");
@@ -18,7 +18,7 @@ const ShopDetail: React.FC = () => {
         data,
         refetch,
         isLoading
-    } = useGetDetailShopQuery(Number(shop_id || 0))
+    } = useGetDetailShopQuery(Number(shop_id || 0));
 
     useEffect(() => {
         refetch();
@@ -35,9 +35,11 @@ const ShopDetail: React.FC = () => {
                 <Group>
                     <Button
                         leftSection={matches ? undefined : <IconSettings/>}
+                        onClick={() => {}}
                     >{matches ? <IconSettings/> : "Chỉnh sửa shop"}</Button>
                     <Button 
                         leftSection={matches ? undefined : <IconLayoutGridAdd />}
+                        onClick={() => navigation(`/me/shop/${shop_id}/create-product`)}
                     >{matches ? <IconLayoutGridAdd /> : "Tạo mới sản phẩm"}</Button>
                 </Group>
             </Group>
@@ -45,4 +47,4 @@ const ShopDetail: React.FC = () => {
     )
 }
 
-export default ShopDetail;
+export default DetailShop;

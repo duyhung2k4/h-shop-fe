@@ -4,6 +4,7 @@ import { IconTrash, IconX } from "@tabler/icons-react";
 import { useNavigate, useParams } from "react-router";
 import { useForm } from "@mantine/form";
 import { useCreateProductMutation } from "@/redux/api/product.api";
+import { fileToBytes } from "@/utils/file";
 
 const CreateProduct: React.FC = () => {
     const { shop_id } = useParams();
@@ -23,21 +24,28 @@ const CreateProduct: React.FC = () => {
     });
 
     const handleCreateProduct = async (values: FormProductCreate) => {
+        const  { dataBytes, error } = await fileToBytes(values.files);
+
+        if(error !== null) {
+            console.log(error);
+            return
+        }
+
         let newProduct: Record<string, any> = {
-            files: values.files,
-            name: values.name,
-            shopId: Number(shop_id || 0)
+            files: dataBytes.map((d) => Array.from(d)),
+            infoProduct: {
+                name: values.name,
+                shopId: Number(shop_id || 0),
+            },
         };
 
         values.fields.forEach((f) => {
-            newProduct[`${f.name}`] = f.value;
+            newProduct.infoProduct[`${f.name}`] = f.value;
         });
 
         const result = await post(newProduct);
         console.log(result);
     }
-
-    console.log(isLoading);
 
     return (
         <Stack>

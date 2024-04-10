@@ -1,11 +1,11 @@
 
 export const fileToBytes = async (files: File[]) => {
-    let dataBytes: Uint8Array[] = [];
+    let dataReturn: FileReturn[] = [];
     let error = null;
 
-    const promises: Promise<Uint8Array>[] = [];
+    const promises: Promise<FileReturn>[] = [];
     files.forEach((f) => {
-        promises.push(new Promise<Uint8Array>((resolve, reject) => {
+        promises.push(new Promise<FileReturn>((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const arrayBuffer = e.target?.result;
@@ -13,7 +13,11 @@ export const fileToBytes = async (files: File[]) => {
                     reject(new Error("read file faild!"));
                 } else {
                     const uint8Array = new Uint8Array(arrayBuffer);
-                    resolve(uint8Array);
+                    resolve({
+                        name: f.name,
+                        format: f.type,
+                        dataBytes: uint8Array,
+                    });
                 }
             }
 
@@ -22,15 +26,24 @@ export const fileToBytes = async (files: File[]) => {
     })
 
     await Promise.all(promises)
-        .then((data: Uint8Array[]) => {
-            dataBytes = data;
+        .then((data: FileReturn[]) => {
+            dataReturn = data;
         })
         .catch((err) => {
             error = err
         })
 
     return {
-        dataBytes,
+        dataReturn: dataReturn.map((d) => ({
+            ...d,
+            dataBytes: Array.from(d.dataBytes)
+        })),
         error,
     };
+}
+
+export type FileReturn = {
+    dataBytes: Uint8Array
+    name: string
+    format: string
 }

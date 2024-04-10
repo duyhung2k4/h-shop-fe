@@ -24,15 +24,17 @@ const CreateProduct: React.FC = () => {
     });
 
     const handleCreateProduct = async (values: FormProductCreate) => {
-        const  { dataBytes, error } = await fileToBytes(values.files);
+        const  { dataReturn, error } = await fileToBytes(values.files);
 
         if(error !== null) {
             console.log(error);
             return
         }
 
+        console.log(dataReturn);
+
         let newProduct: Record<string, any> = {
-            files: dataBytes.map((d) => Array.from(d)),
+            files: dataReturn,
             infoProduct: {
                 name: values.name,
                 shopId: Number(shop_id || 0),

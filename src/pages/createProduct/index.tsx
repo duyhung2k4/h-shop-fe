@@ -5,11 +5,13 @@ import { useNavigate, useParams } from "react-router";
 import { useForm } from "@mantine/form";
 import { useCreateProductMutation } from "@/redux/api/product.api";
 import { fileToBytes } from "@/utils/file";
+import { useNotification } from "@/hook/notification.hook";
 
 const CreateProduct: React.FC = () => {
     const { shop_id } = useParams();
     const navigation = useNavigate();
     const [post, { isLoading }] = useCreateProductMutation();
+    const noti = useNotification();
 
     if (shop_id === undefined) {
         navigation("/me/shop/not-found");
@@ -31,8 +33,6 @@ const CreateProduct: React.FC = () => {
             return
         }
 
-        console.log(dataReturn);
-
         let newProduct: Record<string, any> = {
             files: dataReturn,
             infoProduct: {
@@ -46,7 +46,13 @@ const CreateProduct: React.FC = () => {
         });
 
         const result = await post(newProduct);
-        console.log(result);
+        if ("error" in result) {
+            noti.error("Tạo sản phẩm thất bại");
+            return;
+          }
+
+          noti.success("Tạo sản phẩm thành công");
+          navigation(`/me/shop/${shop_id}`);
     }
 
     return (

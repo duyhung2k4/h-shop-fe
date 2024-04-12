@@ -84,7 +84,7 @@ const CreateProduct: React.FC = () => {
                     </Grid.Col>
                     <Grid.Col span={{ xs: 12, md: 6 }}>
                         <TextInput
-                            placeholder="Tên shop"
+                            placeholder="Tên sản phẩm"
                             {...form.getInputProps("name")}
                         />
                     </Grid.Col>

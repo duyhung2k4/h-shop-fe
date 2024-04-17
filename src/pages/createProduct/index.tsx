@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, FileInput, Grid, Group, Stack, Text, Textarea, TextInput, Tooltip } from "@mantine/core";
+import { Button, FileInput, Grid, Group, NumberInput, Stack, Text, Textarea, TextInput, Tooltip } from "@mantine/core";
 import { IconTrash, IconX } from "@tabler/icons-react";
 import { useNavigate, useParams } from "react-router";
 import { useForm } from "@mantine/form";
@@ -21,6 +21,7 @@ const CreateProduct: React.FC = () => {
         initialValues: {
             files: [],
             name: "",
+            price: 0,
             fields: []
         },
     });
@@ -38,6 +39,7 @@ const CreateProduct: React.FC = () => {
             infoProduct: {
                 name: values.name,
                 shopId: Number(shop_id || 0),
+                price: values.price,
             },
         };
 
@@ -86,6 +88,12 @@ const CreateProduct: React.FC = () => {
                         <TextInput
                             placeholder="Tên sản phẩm"
                             {...form.getInputProps("name")}
+                        />
+                    </Grid.Col>
+                    <Grid.Col span={{ xs: 12, md: 6 }}>
+                        <NumberInput
+                            placeholder="Giá"
+                            {...form.getInputProps("price")}
                         />
                     </Grid.Col>
                 </Grid>
@@ -173,6 +181,7 @@ export default CreateProduct;
 type FormProductCreate = {
     files: File[]
     name: string
+    price: number
     fields: {
         name: string
         value: any

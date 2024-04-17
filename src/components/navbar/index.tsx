@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "@mantine/core";
-import { IconHome, IconShoppingBag } from '@tabler/icons-react';
+import { IconHome, IconShoppingBag, IconTestPipe2 } from '@tabler/icons-react';
 import { useNavigate } from "react-router";
 
 const AppNavbar: React.FC = () => {
@@ -20,6 +20,13 @@ const AppNavbar: React.FC = () => {
                 active={path === "/me/shop"}
                 label="Shop của bạn"
                 leftSection={<IconShoppingBag size="1rem" stroke={2} />}
+                childrenOffset={28}
+            />
+            <NavLink
+                onClick={() => navigation("/test")}
+                active={path === "/test"}
+                label="Test"
+                leftSection={<IconTestPipe2 size="1rem" stroke={2} />}
                 childrenOffset={28}
             />
         </>

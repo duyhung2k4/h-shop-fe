@@ -12,3 +12,6 @@ export const PageCreateProduct = lazy(() => import("@/pages/createProduct"));
 
 // other
 export const PageNotFound = lazy(() => import("@/pages/not_found"));
+
+// test
+export const PageTest = lazy(() => import("@/pages/test"));

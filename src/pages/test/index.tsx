@@ -18,7 +18,7 @@ const Test: React.FC = () => {
                 "typePay": "cash",
                 "orders": [
                     {
-                        "productId": "661f9d76c802bf9e9a9d35ad",
+                        "productId": "66293bbd33919f71758d0a30",
                         "warehouseId": 2,
                         "amount": 1
                     }

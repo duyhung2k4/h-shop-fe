@@ -13,7 +13,6 @@ import {
     PageLogin, 
     PageNotFound, 
     PageShop,
-    PageTest, 
 } from "./lazy";
 
 const AppRouter: React.FC = () => {
@@ -29,7 +28,6 @@ const AppRouter: React.FC = () => {
             <Route path="/me/shop/:shop_id" element={<PageDetailShop />} />
             <Route path="/me/shop/create" element={<PageCreateShop />} />
             <Route path="/me/shop/:shop_id/create-product" element={<PageCreateProduct/>} />
-            <Route path="/test" element={<PageTest/>} />
           </Route>
         </Route>
 

@@ -93,10 +93,12 @@ const Login: React.FC = () => {
         <TextInput
           label="Email"
           placeholder="Nhập email"
+          w={"100%"}
         />
         <PasswordInput
           label="Mật khẩu"
           placeholder="Nhập mật khẩu"
+          w={"100%"}
         />
 
         <Button

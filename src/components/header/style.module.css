@@ -1,0 +1,22 @@
+.root {
+  padding: 20px;
+  border-bottom: 1px solid black;
+}
+
+.text__input {
+  border-bottom: 1px solid black;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: black;
+}
+
+.nav__link[data-active="true"] {
+  background-color: #FFFFFF;
+}
+
+.nav__link[data-active="true"] .mantine-NavLink-label {
+  font-size: 24px;
+  color: black;
+}

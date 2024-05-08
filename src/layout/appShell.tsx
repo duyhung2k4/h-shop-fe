@@ -1,5 +1,5 @@
 import React, { createContext, Suspense } from "react";
-import { AppShell, LoadingOverlay } from '@mantine/core';
+import { AppShell, Group, LoadingOverlay, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useOutlet } from "react-router";
 import AppHeader from "@/components/header";
@@ -25,36 +25,39 @@ const AppshellLayout: React.FC = () => {
   const outlet = useOutlet();
 
   return (
-    <AppShellContext.Provider 
-      value={{
-        mobileOpened,
-        desktopOpened,
-        toggleMobile,
-        toggleDesktop,
-      }}
-    >
-      <AppShell
-        header={{ height: 60 }}
-        navbar={{
-          width: 230,
-          breakpoint: 'sm',
-          collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
-        }}
-        padding="md"
-      >
-        <AppShell.Header>
-          <AppHeader/>
-        </AppShell.Header>
-        <AppShell.Navbar p={0}>
-            <AppNavbar/>
-        </AppShell.Navbar>
-        <AppShell.Main>
-            <Suspense fallback={<LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }}/>}>
-                {outlet}
-            </Suspense>
-        </AppShell.Main>
-      </AppShell>
-    </AppShellContext.Provider>
+    // <AppShellContext.Provider 
+    //   value={{
+    //     mobileOpened,
+    //     desktopOpened,
+    //     toggleMobile,
+    //     toggleDesktop,
+    //   }}
+    // >
+    //   <AppShell
+    //     header={{ height: 60 }}
+    //     navbar={{
+    //       width: 230,
+    //       breakpoint: 'sm',
+    //       collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+    //     }}
+    //     padding="md"
+    //   >
+    //     <AppShell.Header>
+    //       <AppHeader/>
+    //     </AppShell.Header>
+    //     <AppShell.Navbar p={0}>
+    //         <AppNavbar/>
+    //     </AppShell.Navbar>
+    //     <AppShell.Main>
+    //         <Suspense fallback={<LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }}/>}>
+    //             {outlet}
+    //         </Suspense>
+    //     </AppShell.Main>
+    //   </AppShell>
+    // </AppShellContext.Provider>
+    <Stack>
+      <AppHeader/>
+    </Stack>
   )
 }
 

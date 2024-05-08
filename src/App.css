@@ -2,4 +2,6 @@
     min-width: 100vw;
     min-height: 100vh;
     background-color: #fff;
+    font-family: "Roboto", sans-serif !important;
+    font-weight: 500;
 }

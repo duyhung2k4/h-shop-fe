@@ -5,15 +5,14 @@ import AppshellLayout from "@/layout/appShell";
 
 import { Routes, Route } from "react-router";
 
-import { 
-    PageCreateProduct,
-    PageCreateShop,
-    PageDashboard, 
-    PageDetailShop, 
+import {  
+  PageHome,
     PageLogin, 
-    PageNotFound, 
-    PageShop,
+    PageNotFound,
+    PageShops,
+    PageTopSale, 
 } from "./lazy";
+import { ROUTER } from "@/constants/router";
 
 const AppRouter: React.FC = () => {
   return (
@@ -23,11 +22,9 @@ const AppRouter: React.FC = () => {
 
         <Route element={<ProtectedLayout/>}>
           <Route element={<AppshellLayout/>}>
-            <Route path="/" element={<PageDashboard />} />
-            <Route path="/me/shop" element={<PageShop />} />
-            <Route path="/me/shop/:shop_id" element={<PageDetailShop />} />
-            <Route path="/me/shop/create" element={<PageCreateShop />} />
-            <Route path="/me/shop/:shop_id/create-product" element={<PageCreateProduct/>} />
+            <Route path={ROUTER.HOME.href} element={<PageHome/>} />
+            <Route path={ROUTER.SHOPS.href} element={<PageShops/>} />
+            <Route path={ROUTER.TOP_SALE.href} element={<PageTopSale/>} />
           </Route>
         </Route>
 

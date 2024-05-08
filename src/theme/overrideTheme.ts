@@ -12,7 +12,6 @@ const themeOverride = createTheme({
     InputWrapper: {
       styles: {
         root: {
-          width: "100%",
         } as CSSProperties
       }
     },

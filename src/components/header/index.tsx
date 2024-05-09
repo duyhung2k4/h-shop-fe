@@ -1,64 +1,91 @@
-import React, { useEffect, useState } from "react";
-import { Group, Image, TextInput, NavLink, Box } from "@mantine/core";
-import classes from "./style.module.css";
+import React, { createContext, useState } from "react";
 
-import UserIcon from "@/assets/icon/user-svgrepo-com.svg";
-import TrashIcon from "@/assets/icon/trash-alt-svgrepo-com.svg";
-import CarIcon from "@/assets/icon/car-round-645-svgrepo-com.svg";
-import RingIcon from "@/assets/icon/ring-ringing-alert-bell-svgrepo-com.svg";
-import FindIcon from "@/assets/icon/find-svgrepo-com.svg";
-import { ObjectRouter, ROUTER } from "@/constants/router";
+import HeaderOption from "./components/options";
+import AppHeaderNavlinks from "./components/navlinks";
+import { Group, Image, NavLink, Stack, TextInput } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { ROUTER } from "@/constants/router";
 import { useNavigate } from "react-router";
 
+import FindIcon from "@/assets/icon/find-svgrepo-com.svg";
+import classes from "./style.module.css";
+import AppHeaderDrawer from "./components/drawer";
+
+
 const AppHeader: React.FC = () => {
-  const [navlinks, setNavlinks] = useState<ObjectRouter[]>([]);
+    const [drawer, setDrawer] = useState<boolean>(false);
+    const matched_1100 = useMediaQuery('(max-width: 1100px)');
+    const matched_850 = useMediaQuery('(max-width: 850px)');
+    const matched_550 = useMediaQuery('(max-width: 550px)');
 
-  const navigation = useNavigate();
+    const navigation = useNavigate();
 
-  useEffect(() => {
-    setNavlinks([
-      ROUTER.SHOPS,
-      ROUTER.HOME,
-      ROUTER.TOP_SALE,
-    ])
-  }, []);
+    return (
+        <AppHeaderContext.Provider
+            value={{
+                matched_1100,
+                matched_850,
+                matched_550,
+                drawer,
+                setDrawer,
+            }}
+        >
+            <Group
+                align="center"
+                justify={matched_550 ? "space-between" : "center"}
+                gap={"10%"}
+                className={classes.root}
+            >
+                <Group>
+                    <Image src={FindIcon} height={24} width={24} />
+                    <TextInput
+                        variant="unstyled"
+                        className={classes.text__input}
+                    />
+                </Group>
+                <Stack 
+                    h={50} 
+                    justify="center"
+                    display={matched_550 ? "none" : undefined}
+                >
+                    {
+                        matched_850 ?
+                            <NavLink
+                                className={classes.navlink__home}
+                                onClick={() => navigation(ROUTER.HOME.href)}
+                                label={ROUTER.HOME?.name || ""}
+                                active={(ROUTER.HOME?.href || "") == window.location.pathname}
+                                classNames={{
+                                    label: classes.navlink__label
+                                }}
+                            />
+                            :
+                            <AppHeaderNavlinks />
+                    }
+                </Stack>
+                <HeaderOption />
+            </Group>
 
-  return (
-    <Group
-      align="center"
-      justify="center"
-      gap={"10%"}
-      className={classes.root}
-    >
-      <Group>
-        <Image src={FindIcon} height={24} width={24} />
-        <TextInput
-          variant="unstyled"
-          className={classes.text__input}
-        />
-      </Group>
-      <Group gap={50}>
-        {
-          navlinks.map((item, i) => (
-            <Box key={i}>
-              <NavLink
-                className={classes.nav__link}
-                onClick={() => navigation(item.href)}
-                label={item?.name || ""}
-                active={(item?.href || "") == window.location.pathname}
-              />
-            </Box>
-          ))
-        }
-      </Group>
-      <Group gap={30}>
-        <Image src={CarIcon} height={24} width={24} />
-        <Image src={RingIcon} height={24} width={24} />
-        <Image src={TrashIcon} height={24} width={24} />
-        <Image src={UserIcon} height={24} width={24} />
-      </Group>
-    </Group>
-  )
+            <AppHeaderDrawer/>
+        </AppHeaderContext.Provider>
+    )
 }
+
+export type TypeAppHeaderContext = {
+    matched_1100: boolean | undefined
+    matched_850: boolean | undefined
+    matched_550: boolean | undefined
+
+    drawer: boolean
+    setDrawer: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const AppHeaderContext = createContext<TypeAppHeaderContext>({
+    matched_1100: true,
+    matched_850: true,
+    matched_550: true,
+    drawer: false,
+    setDrawer: () => {},
+})
 
 export default AppHeader;

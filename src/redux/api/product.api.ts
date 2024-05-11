@@ -7,7 +7,7 @@ export const productApi = createApi({
     reducerPath: "productApi",
     baseQuery: axiosBaseQuery(),
     endpoints: (builder) => ({
-        createProduct: builder.mutation<QueryReturnType<any>, any>({
+        createProduct: builder.mutation<QueryReturnType<Record<string, any>>, Record<string, any>>({
             query: (payload) => ({
                 ...endPoint.product.createProduct(),
                 data: payload,

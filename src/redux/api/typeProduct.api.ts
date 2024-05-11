@@ -4,6 +4,7 @@ import { QueryReturnType } from "@/dto/request/base.request";
 import { TypeProductModel } from "@/model/typeProduct";
 import { endPoint } from "../query/endpoint";
 import { TypeProductRequest } from "@/dto/request/typeProduct";
+import { CategoryModel } from "@/model/category";
 
 export const typeProductApi = createApi({
     reducerPath: "typeProductApi",
@@ -13,15 +14,26 @@ export const typeProductApi = createApi({
             query: (payload) => ({
                 ...endPoint.typeProduct.getTypeProduct(),
                 params: {
-                    shopId: payload
+                    shopId: payload,
                 }
+            })
+        }),
+        getCategory: builder.query<QueryReturnType<CategoryModel[]>, null>({
+            query: () => ({
+                ...endPoint.typeProduct.getCategory(),
             })
         }),
         createTypeProduct: builder.mutation<QueryReturnType<TypeProductModel>, TypeProductRequest>({
             query: (payload) => ({
                 ...endPoint.typeProduct.createTypeProduct(),
-                data: payload
+                data: payload,
             })
         })
     }),
-})
+});
+
+export const {
+    useCreateTypeProductMutation,
+    useGetTypeProductQuery,
+    useGetCategoryQuery,
+} = typeProductApi

@@ -62,6 +62,11 @@ export const endPoint = {
             method: "GET",
             headers: HEADER.protectedHeader(),
         }),
+        getCategory: () => ({
+            url: "shop/api/v1/public/type-product/category",
+            method: "GET",
+            headers: HEADER.defaultHeader(),
+        }),
         createTypeProduct: () => ({
             url: "shop/api/v1/protected/type-product",
             method: "POST",

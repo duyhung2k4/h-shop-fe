@@ -4,6 +4,7 @@ import { endPoint } from "../query/endpoint";
 import { QueryReturnType } from "@/dto/request/base.request";
 import { AuthResponse } from "@/dto/response/auth.response";
 import { LoginGoogleRequest } from "@/dto/request/auth.request";
+import { ROLE_APP } from "@/model/variable";
 
 export const authApi = createApi({
     reducerPath: "authApi",
@@ -12,7 +13,10 @@ export const authApi = createApi({
         loginGoogle: builder.mutation<QueryReturnType<AuthResponse>, LoginGoogleRequest>({
             query: (payload) => ({
                 ...endPoint.auth.loginGoogle(),
-                data: payload,
+                data: {
+                    ...payload,
+                    role: ROLE_APP,
+                },
             }),
         }),
         refreshToken: builder.mutation<QueryReturnType<AuthResponse>, null>({

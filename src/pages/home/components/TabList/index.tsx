@@ -15,8 +15,8 @@ const HomeTabList: React.FC = () => {
                     categories.map((item) =>
                         <Tabs.Tab
                             key={item.ID}
-                            className={classes.tab}
                             value={item.code}
+                            className={classes.tab}
                             classNames={{
                                 tabLabel: classes.tab__label
                             }}

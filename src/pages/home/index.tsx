@@ -2,9 +2,10 @@ import React, { createContext, useEffect, useState } from "react";
 import { Box, Tabs } from "@mantine/core";
 
 import HomeTabList from "./components/TabList";
+import HomeTabPanel from "./components/TabPanel";
+
 import { useGetCategoryQuery } from "@/redux/api/typeProduct.api";
 import { CategoryModel } from "@/model/category";
-import HomeTabPanel from "./components/TabPanel";
 
 
 const Home: React.FC = () => {

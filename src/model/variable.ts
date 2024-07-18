@@ -3,4 +3,4 @@ export enum TOKEN_TYPE {
   REFRESH_TOKEN = "refresh_token"
 }
 
-export const ROLE_APP = "user";
+export const ROLE_APP = "user"

@@ -1,0 +1,151 @@
+footer {
+    box-sizing: border-box;
+}
+
+.f_container {
+    margin: 0;
+    padding: 0;
+    background: #585858;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.f_lienhe {
+    color: white;
+    width: 100%;
+}
+
+.f_oquy {
+    font-size: 50px;
+    margin: 0;
+}
+
+.f_trch {
+    font-size: 20px;
+    margin: 0 0 0 20px;
+    padding-bottom: 30px;
+}
+
+.f_diachi {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.f_diachi img {
+    width: 20px;
+    height: 20px;
+    color: white;
+    display: flex;
+}
+
+.f_diachi p {
+    margin: 0;
+}
+
+.f_phone {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.f_phone img {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 30%;
+}
+
+.f_mail {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.f_mail img {
+    width: 20px;
+    height: 20px;
+}
+
+.f_phone p {
+    margin: 5px 0;
+}
+
+.f_mail p {
+    margin: 5px 0;
+}
+
+.f_CSKH {
+    width: 100%;
+    color: white;
+}
+
+.f_text-cskh {
+    font-size: 15px;
+    margin: 0;
+}
+
+.f_CSKH ul {
+    padding: 0 0 0 20px;
+    margin: 10px 0;
+}
+
+.f_CSKH a {
+    text-decoration: none;
+    color: white;
+}
+
+.f_CSKH ul li {
+    padding-bottom: 10px;
+}
+
+.f_follow {
+    color: white;
+    width: 100%;
+}
+
+.f_follow p {
+    margin: 0;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
+.f_follow img {
+    width: 20px;
+    height: 20px;
+}
+
+.f_theodoi {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.f_map {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.f_map p {
+    color: white;
+    margin: 0;
+}
+
+.f_end {
+    height: 40px;
+    background: #8f8e8e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f_end p {
+    margin: 0;
+    color: #bebebe;
+}

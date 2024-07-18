@@ -1,0 +1,14 @@
+.card {
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    align-items: center;
+    padding: 20px 100px;
+    box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.5);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.5);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.5);
+}
+
+.icon {
+    width: 100px !important;
+}

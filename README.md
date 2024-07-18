@@ -28,3 +28,13 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+# Hook -> Quản lí Stage + render UI
+# Pages -> Quản lí trang
+# Router -> Điều hướng trang
+# Components -> Các thành phần dùng chung
+# Utils -> Các hàm dùng chung
+# Model -> Dữ liệu trùng với các bảng trong Database
+# dto -> Quản lí dữ liệu gửi đi và nhận về
+# assets -> Tài nguyên ảnh của web
+# constants -> các hằng số dùng trong webapp

@@ -6,6 +6,8 @@ const themeOverride = createTheme({
       styles: {
         input: {
           borderRadius: 8,
+          border: 0,
+          backgroundColor: "#efefef"
         } as CSSProperties
       }
     },
@@ -22,7 +24,7 @@ const themeOverride = createTheme({
           backgroundColor: "#000",
         } as CSSProperties
       }
-    }
+    },
   },
 });
 

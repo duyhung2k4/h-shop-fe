@@ -63,7 +63,7 @@ export const endPoint = {
             headers: HEADER.protectedHeader(),
         }),
         getCategory: () => ({
-            url: "shop/api/v1/public/type-product/category",
+            url: "shop/api/v1/public/category",
             method: "GET",
             headers: HEADER.defaultHeader(),
         }),
@@ -78,6 +78,101 @@ export const endPoint = {
             url: "product/api/v1/protected/product",
             method: "POST",
             headers: HEADER.protectedHeader(),
+        }),
+        update: () => ({
+            url: "product/api/v1/protected/product",
+            method: "PUT",
+            headers: HEADER.protectedHeader(),
+        }),
+        getAppProduct: () => ({
+            url: "product/api/v1/protected/product/all",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+        getDetailProduct: () => ({
+            url: "product/api/v1/protected/product/detail",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+
+        searh: () => ({
+            url: "search/api/v1/product/search",
+            method: "GET",
+            headers: HEADER.defaultHeader(),
+        }),
+
+        getTypeInWarehouse: () => ({
+            url: "product/api/v1/protected/type-in-warehouse",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+
+        getWarehouse: () => ({
+            url: "product/api/v1/protected/warehouse",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+
+        heart: () => ({
+            url: "product/api/v1/protected/product/heart",
+            method: "POST",
+            headers: HEADER.protectedHeader(),
+        }),
+        isHeart: () => ({
+            url: "product/api/v1/protected/product/is-heart",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+        getHeart: () => ({
+            url: "product/api/v1/protected/product/is-heart-list",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+        cart: () => ({
+            url: "product/api/v1/protected/product/cart",
+            method: "POST",
+            headers: HEADER.protectedHeader(),
+        }),
+        isCart: () => ({
+            url: "product/api/v1/protected/product/is-cart",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+        getCart: () => ({
+            url: "product/api/v1/protected/product/is-cart-list",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
+    },
+
+    file: {
+        getImagesByProductId: () => ({
+            url: "file/api/v1/public/image-product/productId",
+            method: "GET",
+            headers: HEADER.defaultHeader(),
+        }),
+        getAvatarByProductId: () => ({
+            url: "file/api/v1/public/image-product/avatar",
+            method: "GET",
+            headers: HEADER.defaultHeader(),
         })
+    },
+
+    order: {
+        order: () => ({
+            url: "order/api/v1/protected/order",
+            method: "POST",
+            headers: HEADER.protectedHeader(),
+        }),
+        changeStatus: () => ({
+            url: "order/api/v1/protected/order/change-status",
+            method: "POST",
+            headers: HEADER.protectedHeader(),
+        }),
+        getPurchaseOrder: () => ({
+            url: "order/api/v1/protected/order/purchase-order",
+            method: "GET",
+            headers: HEADER.protectedHeader(),
+        }),
     }
 }

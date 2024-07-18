@@ -89,7 +89,7 @@ const Login: React.FC = () => {
         <Title>Đăng nhập</Title>
         <Text
           style={{ textAlign: "center" }}
-        >Chào mừng đến với sàn thương mại điện tử của H</Text>
+        >Chào mừng đến với sàn thương mại điện tử của H Shop</Text>
         <TextInput
           label="Email"
           placeholder="Nhập email"

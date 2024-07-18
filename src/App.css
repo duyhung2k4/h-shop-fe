@@ -4,6 +4,15 @@
     background-color: #fff;
     font-family: "Roboto", sans-serif !important;
     font-weight: 500;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    color: #000;
+}
+
+body {
+    margin: 0px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

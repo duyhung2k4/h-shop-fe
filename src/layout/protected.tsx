@@ -3,9 +3,12 @@ import React, { Suspense, useEffect } from "react";
 import { LoadingOverlay } from "@mantine/core";
 import { useNavigate, useOutlet } from "react-router-dom";
 import { useRefreshTokenMutation } from "@/redux/api/auth.api";
+import { useAppSelector } from "@/redux/hook";
 
 const ProtectedLayout: React.FC = () => {
   const outlet = useOutlet();
+
+  const isLoading = useAppSelector(state => Object.values(state.authApi.mutations).some(mutation => mutation?.status === 'pending'))
 
   const [ refresh ] = useRefreshTokenMutation();
   const navigation = useNavigate();
@@ -20,6 +23,10 @@ const ProtectedLayout: React.FC = () => {
   useEffect(() => {
     handleRefresh();
   }, []);
+
+  if(isLoading) {
+    return <LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }} />
+  }
 
   return (
     <Suspense fallback={<LoadingOverlay visible overlayProps={{ radius: "sm", blur: 2 }} />}>

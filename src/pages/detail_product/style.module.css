@@ -1,0 +1,26 @@
+.name_product {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.avatar {
+    object-fit: contain;
+    aspect-ratio: 5/3;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.5);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.5);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.5);
+}
+
+.image {
+    aspect-ratio: 5/3;
+    max-height: unset;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.active {
+    padding: 4px;
+    border: 2px solid gray;
+}

@@ -3,35 +3,50 @@ import AuthLayout from "../layout/auth";
 import ProtectedLayout from "../layout/protected";
 import AppshellLayout from "@/layout/appShell";
 
-import { Routes, Route } from "react-router";
+// import { Routes, Route, Router } from "react-router";
+import { Routes, Route } from "react-router-dom";
 
-import {  
-  PageHome,
-    PageLogin, 
+import {
+    PageBlog,
+    PageCart,
+    PageDetailProduct,
+    PageHeart,
+    PageHome,
+    PageLogin,
     PageNotFound,
-    PageShops,
-    PageTopSale, 
+    PageOrder,
+    PagePaymentResult,
+    PagePuchaseOrder,
+    PageShop,
+    PageShopping,
 } from "./lazy";
 import { ROUTER } from "@/constants/router";
 
 const AppRouter: React.FC = () => {
-  return (
-    <Routes>
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<PageLogin />} />
+    return (
+        <Routes>
+            <Route element={<AuthLayout />}>
+                <Route path={ROUTER.LOGIN.href} element={<PageLogin />} />
 
-        <Route element={<ProtectedLayout/>}>
-          <Route element={<AppshellLayout/>}>
-            <Route path={ROUTER.HOME.href} element={<PageHome/>} />
-            <Route path={ROUTER.SHOPS.href} element={<PageShops/>} />
-            <Route path={ROUTER.TOP_SALE.href} element={<PageTopSale/>} />
-          </Route>
-        </Route>
+                <Route element={<ProtectedLayout />}>
+                    <Route element={<AppshellLayout />}>
+                        <Route path={ROUTER.HOME.href} element={<PageHome />} />
+                        <Route path={ROUTER.SHOPPING.href} element={<PageShopping />} />
+                        <Route path={ROUTER.SHOP.href} element={<PageShop />} />
+                        <Route path={ROUTER.BLOG.href} element={<PageBlog />} />
+                        <Route path={ROUTER.PUCHASE_ORDER.href} element={<PagePuchaseOrder />} />
+                        <Route path={ROUTER.HEART.href} element={<PageHeart />} />
+                        <Route path={ROUTER.CART.href} element={<PageCart/>} />
+                    </Route>
+                    <Route path={`${ROUTER.DETAIL_PRODUCT.href}/:id`} element={<PageDetailProduct />} />
+                    <Route path={ROUTER.ORDER.href} element={<PageOrder />} />
+                    <Route path={ROUTER.PAYMENT_RESULT.href} element={<PagePaymentResult />} />
+                </Route>
 
-        <Route path="*" element={<PageNotFound/>}/>
-      </Route>
-    </Routes>
-  )
+                <Route path="*" element={<PageNotFound />} />
+            </Route>
+        </Routes>
+    )
 }
 
 export default AppRouter;

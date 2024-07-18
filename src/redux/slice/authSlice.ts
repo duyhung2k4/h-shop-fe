@@ -1,7 +1,8 @@
+import Cookies from "js-cookie";
+
 import { ProfileModel } from "@/model/profile";
 import { createSlice } from "@reduxjs/toolkit";
 import { authApi } from "../api/auth.api";
-import Cookies from "js-cookie";
 import { TOKEN_TYPE } from "@/model/variable";
 
 interface AuthState {

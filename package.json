@@ -1,5 +1,5 @@
 {
-  "name": "h-shop-fe",
+  "name": "web_o_quy_btn",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/carousel": "^7.10.2",
     "@mantine/core": "^7.5.3",
     "@mantine/dates": "^7.5.3",
     "@mantine/dropzone": "^7.5.3",
@@ -26,28 +27,31 @@
     "@tiptap/starter-kit": "^2.2.4",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.6.7",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.11",
+    "embla-carousel-react": "^8.1.5",
     "js-cookie": "^3.0.5",
+    "mantine-react-table": "^2.0.0-beta.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-router": "^6.22.3",
     "react-router-dom": "^6.22.3",
+    "redux-persist": "^6.0.0",
+    "swiper": "^11.1.4",
     "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.25",
-    "@types/react": "^18.2.56",
-    "@types/react-dom": "^18.2.19",
-    "@typescript-eslint/eslint-plugin": "^7.0.2",
-    "@typescript-eslint/parser": "^7.0.2",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "path": "^0.12.7",
+    "eslint-plugin-react-refresh": "^0.4.6",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4",
+    "vite": "^5.2.0",
     "vite-svg-plugin": "^1.0.4"
   }
 }

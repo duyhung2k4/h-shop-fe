@@ -42,6 +42,10 @@ export const fileToBytes = async (files: File[]) => {
     };
 }
 
+export const convertByteToSrc = (format: string, data: number[]) => {
+    return `data:${format};base64,${data}`
+}
+
 export type FileReturn = {
     dataBytes: Uint8Array
     name: string

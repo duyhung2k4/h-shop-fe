@@ -1,28 +1,38 @@
-import React from "react";
-import { NavLink } from "@mantine/core";
-import { IconHome, IconShoppingBag } from '@tabler/icons-react';
+import React, { useContext } from "react";
+import { Image, NavLink, Stack } from "@mantine/core";
 import { useNavigate } from "react-router";
+import { AppShellContext, TypeAppShellContext } from "@/layout/appShell";
+import classes from "./style.module.css";
 
 const AppNavbar: React.FC = () => {
     const navigation = useNavigate();
     const path = window.location.pathname;
+    const { links } = useContext<TypeAppShellContext>(AppShellContext);
+
     return (
-        <>
-            <NavLink
-                onClick={() => navigation("/")}
-                active={path === "/"}
-                label="Trang chủ"
-                leftSection={<IconHome size="1rem" stroke={2} />}
-                childrenOffset={28}
-            />
-            <NavLink
-                onClick={() => navigation("/me/shop")}
-                active={path === "/me/shop"}
-                label="Shop của bạn"
-                leftSection={<IconShoppingBag size="1rem" stroke={2} />}
-                childrenOffset={28}
-            />
-        </>
+        <Stack
+            classNames={{
+                root: classes.root
+            }}
+        >
+            <Stack gap={10}>
+                {
+                    links.map((item, i) =>
+                        <NavLink
+                            key={i}
+                            onClick={() => navigation(item.href)}
+                            active={path === item.href}
+                            label={item.name}
+                            classNames={{
+                                root: classes.link,
+                                label: classes.label,
+                            }}
+                            leftSection={<Image src={item.hrefIcon} height={30} width={30} />}
+                        />
+                    )
+                }
+            </Stack>
+        </Stack>
     )
 }
 

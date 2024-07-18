@@ -1,0 +1,8 @@
+.type_product {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.checkbox {
+    cursor: pointer !important;
+}

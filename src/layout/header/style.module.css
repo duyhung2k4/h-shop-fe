@@ -1,0 +1,60 @@
+.root {
+    background-color: #FFF;
+    padding: 0px;
+    justify-content: start;
+    height: 100%;
+    border-bottom: 1px solid black;
+}
+
+.title {
+    font-weight: 600 !important;
+}
+
+.group_option {
+    & :global(.mantine-ActionIcon-icon) {
+        background-color: #FFF;
+    }
+
+    & :global(.mantine-ActionIcon-root) {
+        border: 0px;
+    }
+}
+
+.link {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.link:hover {
+    font-size: 18px;
+    transition: 200ms;
+}
+
+.link_active {
+    text-decoration: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: 200ms !important;
+    font-weight: 600;
+    color: red;
+}
+
+.menu_item {
+    background-color: #000;
+}
+
+.menu_item:hover {
+    background-color: rgb(188, 188, 188) !important;
+}
+
+
+.d_header {
+    display: none !important;
+}
+
+.d_body {
+    padding-top: 30px !important;
+    height: 100%;
+}

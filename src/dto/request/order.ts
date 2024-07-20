@@ -3,7 +3,9 @@ export type OrderReq = {
     warehouseId: number
     typeWarehouseId?: number
     groupOrderId?: number
+    shopId: number
     amount: number
+    total: number
 }
 
 export type GroupOrderReq = {

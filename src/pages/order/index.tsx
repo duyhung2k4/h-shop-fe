@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "@/redux/hook";
-import { ActionIcon, Box, Button, Grid, Group, Image, Modal, NumberFormatter, NumberInput, Stack, Text } from "@mantine/core";
+import { ActionIcon, Box, Button, Grid, Group, Image, Modal, NumberFormatter, NumberInput, Select, Stack, Text } from "@mantine/core";
 import { useNavigate } from "react-router";
 
 import { convertByteToSrc } from "@/utils/file";
@@ -21,6 +21,7 @@ const Order: React.FC = () => {
     const [amount, setAmount] = useState<number>(1);
     const [count, setCount] = useState<number>(0);
     const [modal, setModal] = useState<boolean>(false);
+    const [typePay, setTypePay] = useState<string>("online");
 
     const [post, { isLoading }] = useOrderMutation();
     const {
@@ -53,15 +54,17 @@ const Order: React.FC = () => {
 
         const groupOrder: GroupOrderReq = {
             address: "",
-            typePay: "",
+            typePay,
             orderDescription: "thanh toan san pham",
             orderType: "product",
             orders: [
                 {
                     productId: product[ProductObjectDefaultField._id],
+                    shopId: product[ProductObjectDefaultField.profileId],
                     warehouseId: warehouse.id,
                     typeWarehouseId: typeInWarehouse?.id,
                     amount: amount,
+                    total: amount * (typeInWarehouse ? typeInWarehouse.price : product[ProductObjectDefaultField.price])
                 }
             ],
         };
@@ -71,13 +74,19 @@ const Order: React.FC = () => {
         removeCache("order");
 
         if ("error" in result) {
-            noti.error("Thanh toán thất bại");
+            noti.error("Đặt hàng thất bại");
             return
         };
 
+        if(typePay === "offline") {
+            navigation(ROUTER.SHOPPING.href);
+            noti.success("Đặt hàng thành công");
+            return;
+        }
+
         const urlPayment = result.data.data?.vnpHref;
         if (!urlPayment) {
-            noti.error("Thanh toán thất bại");
+            noti.error("Đặt hàng thất bại");
             return
         }
 
@@ -146,21 +155,31 @@ const Order: React.FC = () => {
                     </Grid.Col>
                 </Grid>
             </Stack>
-            <Stack pos="relative">
+            <Stack pos="relative" mt={20}>
                 <Group classNames={{ root: classes.payment_bar }} >
                     <Group className={classes.content_payment_bar}>
                         <Text>
                             <span style={{ fontWeight: 600 }}>Thanh toán: &nbsp;</span>
                             <NumberFormatter
                                 value={amount * (order.typeInWarehouse?.price || order.product[ProductObjectDefaultField.price])}
-                                suffix="VND"
+                                suffix=" VND"
                                 thousandSeparator
                             />
                         </Text>
-                        <Button
-                            loading={isLoading}
-                            onClick={handleOrder}
-                        >Mua hàng</Button>
+                        <Group>
+                            <Select
+                                value={typePay}
+                                onChange={value => setTypePay(value || "online")}
+                                data={[
+                                    { label: "Thanh toán trực tuyến", value: "online" },
+                                    { label: "Trả sau", value: "offline" },
+                                ]}
+                            />
+                            <Button
+                                loading={isLoading}
+                                onClick={handleOrder}
+                            >Mua hàng</Button>
+                        </Group>
                     </Group>
                 </Group>
             </Stack>

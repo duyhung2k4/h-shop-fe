@@ -1,5 +1,4 @@
 .payment_bar {
-    position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
@@ -10,8 +9,7 @@
 .content_payment_bar {
     width: 100%;
     justify-content: space-between;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-radius: 8px;
     padding: 8px 20px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);

@@ -1,17 +1,20 @@
 import React, { useEffect } from "react";
-import { ActionIcon, Group, Image, NumberFormatter, Rating, Stack, Text } from "@mantine/core";
+import { ActionIcon, Group, Image, NumberFormatter, Stack, Text } from "@mantine/core";
 import { ProductObjectDefaultField } from "@/model/product";
 
-import IconHeaderWhite from "@/assets/icon/heart_white.svg";
-import IconTrolley from "@/assets/icon/trolley.svg";
-import IconTrolleyWhite from "@/assets/icon/trolley_white.svg";
-
-import classes from "./style.module.css";
 import { useGetAvatarByProductIdQuery } from "@/redux/api/file.api";
 import { useNavigate } from "react-router";
 import { ROUTER } from "@/constants/router";
 import { convertByteToSrc } from "@/utils/file";
-import { useCartMutation, useHeartMutation, useIsCartQuery, useIsHeartQuery } from "@/redux/api/product.api";
+import { useHeartMutation, useIsHeartQuery } from "@/redux/api/product.api";
+import { TOKEN_TYPE } from "@/model/variable";
+
+import IconHeaderWhite from "@/assets/icon/heart_white.svg";
+import classes from "./style.module.css";
+import Cookies from "js-cookie";
+import { useNotification } from "@/hook/notification.hook";
+
+
 
 export type CardProductProps = Record<string, any>;
 const CardProduct: React.FC<CardProductProps> = (props) => {
@@ -21,6 +24,7 @@ const CardProduct: React.FC<CardProductProps> = (props) => {
     } = useGetAvatarByProductIdQuery(props[ProductObjectDefaultField._id]);
 
     const navigation = useNavigate();
+    const noti = useNotification();
     const [heart, { isLoading: isLoadingHeart }] = useHeartMutation();
     const {
         data: dataIsHeart,
@@ -28,17 +32,9 @@ const CardProduct: React.FC<CardProductProps> = (props) => {
         isFetching: isLoadingIsHeart,
     } = useIsHeartQuery(props[ProductObjectDefaultField._id]);
 
-    const [cart, { isLoading: isLoadingCart }] = useCartMutation();
-    const {
-        data: dataIsCart,
-        refetch: refetchIsCart,
-        isFetching: isLoadingIsCart,
-    } = useIsCartQuery(props[ProductObjectDefaultField._id]);
-
     useEffect(() => {
         refetch();
         refetchIsHeart();
-        refetchIsCart();
     }, []);
 
     const handleNavigation = () => {
@@ -46,14 +42,15 @@ const CardProduct: React.FC<CardProductProps> = (props) => {
     }
 
     const handleHeart = async () => {
+        if(!Cookies.get(TOKEN_TYPE.ACCESS_TOKEN)) {
+            noti.warning("Bạn chưa đăng nhập");
+            return;
+        }
+
         await heart(props[ProductObjectDefaultField._id]);
         refetchIsHeart();
     }
 
-    const handleCart = async () => {
-        await cart(props[ProductObjectDefaultField._id]);
-        refetchIsCart();
-    }
 
     return (
         <Stack classNames={{ root: classes.root }} gap={0}>
@@ -76,17 +73,20 @@ const CardProduct: React.FC<CardProductProps> = (props) => {
                     classNames={{ root: classes.name }}
                     onClick={handleNavigation}
                 >{props[ProductObjectDefaultField.name]}</Text>
-                <Group justify="space-between">
-                    <Rating value={5} />
-                    <ActionIcon 
-                        classNames={{ root: `${classes.trolley} ${dataIsCart?.data && classes.trolley_active}` }}
-                        loading={isLoadingCart || isLoadingIsCart}
-                        onClick={handleCart}
-                    >
-                        <Image src={dataIsCart?.data ? IconTrolleyWhite : IconTrolley} />
-                    </ActionIcon>
-                </Group>
-                <NumberFormatter suffix="VND" value={props[ProductObjectDefaultField.price]} thousandSeparator />
+                <NumberFormatter 
+                    suffix=" VND" 
+                    value={props[ProductObjectDefaultField.price]} 
+                    thousandSeparator 
+                    style={{
+                        width: "100%",
+                        padding: 8,
+                        borderRadius: 8,
+                        backgroundColor: "#000",
+                        color: "#FFF",
+                        textAlign: "center",
+                        marginTop: 20,
+                    }}
+                />
             </Stack>
         </Stack>
     )

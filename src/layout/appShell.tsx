@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useMemo, useRef, useState } from "react";
 import AppHeader from "@/layout/header";
 
 import { AppShell } from '@mantine/core';
@@ -10,6 +10,8 @@ import { useGetCategoryQuery } from "@/redux/api/typeProduct.api";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { loadCacheOrder } from "@/redux/slice/orderSlice";
 import Footer from "./footer";
+import Cookies from "js-cookie";
+import { TOKEN_TYPE } from "@/model/variable";
 
 export type TypeAppShellContext = {
     mobileOpened: boolean
@@ -31,7 +33,7 @@ export const AppShellContext = createContext<TypeAppShellContext>({
     toggleMobile: () => { },
     toggleDesktop: () => { },
     setWidthMain: () => { },
-    setSearch: () => {},
+    setSearch: () => { },
     links: [],
 })
 
@@ -42,13 +44,31 @@ const AppshellLayout: React.FC = () => {
     const [search, setSearch] = useState<string>("");
     const outlet = useOutlet();
     const refMain = useRef<HTMLDivElement | null>(null);
-    
+
     const dispatch = useAppDispatch();
     const navigation = useNavigate();
 
     const { order } = useAppSelector(state => state.orderSlice);
     const { width } = useWindowDimensions();
     const { refetch: refetchGetCategoryQuery } = useGetCategoryQuery(null);
+
+    const links = useMemo(() => {
+        const token = Cookies.get(TOKEN_TYPE.ACCESS_TOKEN);
+
+        if (!token) {
+            return [
+                ROUTER.HOME,
+                ROUTER.SHOPPING,
+            ]
+        }
+
+        return [
+            ROUTER.HOME,
+            ROUTER.SHOPPING,
+            ROUTER.HEART,
+            ROUTER.PUCHASE_ORDER,
+        ]
+    }, [Cookies.get(TOKEN_TYPE.ACCESS_TOKEN)]);
 
     useEffect(() => {
         setWidthMain(refMain.current?.offsetWidth || 0);
@@ -60,7 +80,7 @@ const AppshellLayout: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if(order) {
+        if (order) {
             navigation(ROUTER.ORDER.href);
         }
     }, [order]);
@@ -68,6 +88,7 @@ const AppshellLayout: React.FC = () => {
     return (
         <AppShellContext.Provider
             value={{
+                links,
                 mobileOpened,
                 desktopOpened,
                 widthMain,
@@ -76,16 +97,10 @@ const AppshellLayout: React.FC = () => {
                 toggleDesktop,
                 setWidthMain,
                 setSearch,
-                links: [
-                    ROUTER.HOME,
-                    ROUTER.SHOPPING,
-                    ROUTER.HEART,
-                    ROUTER.PUCHASE_ORDER,
-                ],
             }}
         >
             <AppShell
-                header={{ 
+                header={{
                     height: 60,
                 }}
                 padding="md"
@@ -108,7 +123,7 @@ const AppshellLayout: React.FC = () => {
 
 
                 <AppShell.Footer pos={"relative"} zIndex={0}>
-                    <Footer/>
+                    <Footer />
                 </AppShell.Footer>
             </AppShell>
         </AppShellContext.Provider>

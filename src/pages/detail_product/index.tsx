@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { ROUTER } from "@/constants/router";
 import { ProductModel } from "@/model/product";
 import { useGetDetailProductQuery, useGetTypeInWarehouseQuery, useGetWarehouseQuery } from "@/redux/api/product.api";
-import { ActionIcon, Container, Grid, Group, Image, LoadingOverlay, Text } from "@mantine/core";
+import { ActionIcon, Button, Container, Grid, Group, Image, LoadingOverlay, Text } from "@mantine/core";
 import { useNavigate, useParams } from "react-router";
 import { useGetImagesByProductIdQuery } from "@/redux/api/file.api";
 import { ImageProductModel } from "@/model/imageProduct";
@@ -30,6 +30,7 @@ const DetailProduct: React.FC = () => {
     const [listTypeProduct, setListTypeProduct] = useState<TypeInWarehouseRes[]>([]);
     const [price, setPrice] = useState<number | null>(null);
     const [typeSelect, setTypeSelect] = useState<TypeInWarehouseRes | null>(null);
+    const [modalInfo, setModalInfo ] = useState<boolean>(false);
 
     const {
         data: dataProduct,
@@ -100,6 +101,7 @@ const DetailProduct: React.FC = () => {
                 listTypeProduct,
                 price,
                 typeSelect,
+                modalInfo,
                 setShow,
                 setProduct,
                 setWarehouse,
@@ -107,10 +109,11 @@ const DetailProduct: React.FC = () => {
                 setListTypeProduct,
                 setPrice,
                 setTypeSelect,
+                setModalInfo,
             }}
         >
             <Container>
-                <Group w={"100%"} mt={20}>
+                <Group w={"100%"} mt={20} mb={20}>
                     <Group>
                         <ActionIcon
                             style={{
@@ -125,6 +128,9 @@ const DetailProduct: React.FC = () => {
                     <Grid w={"100%"}>
                         <Grid.Col span={3}>
                             <DetailProductIntro />
+                            <Group mt={20}>
+                                <Button onClick={() => setModalInfo(true)}>Xem thông tin người đăng</Button>
+                            </Group>
                         </Grid.Col>
                         <Grid.Col span={6}>
                             <DetailProductImages />
@@ -154,6 +160,7 @@ export const DetailProductContext = createContext<TypeDetailProductContext>({
     listTypeProduct: [],
     price: null,
     typeSelect: null,
+    modalInfo: false, 
     setShow: () => { },
     setListImage: () => { },
     setProduct: () => { },
@@ -161,6 +168,7 @@ export const DetailProductContext = createContext<TypeDetailProductContext>({
     setListTypeProduct: () => { },
     setPrice: () => { },
     setTypeSelect: () => { },
+    setModalInfo: () => { },
 })
 
 export type TypeDetailProductContext = {
@@ -171,6 +179,7 @@ export type TypeDetailProductContext = {
     listTypeProduct: TypeInWarehouseRes[]
     price: number | null
     typeSelect: TypeInWarehouseRes | null
+    modalInfo: boolean
     setShow: React.Dispatch<React.SetStateAction<ImageProductModel | null>>
     setProduct: React.Dispatch<React.SetStateAction<ProductModel | null>>
     setWarehouse: React.Dispatch<React.SetStateAction<WarehouseRes | null>>
@@ -178,6 +187,7 @@ export type TypeDetailProductContext = {
     setListTypeProduct: React.Dispatch<React.SetStateAction<TypeInWarehouseRes[]>>
     setPrice: React.Dispatch<React.SetStateAction<number | null>>
     setTypeSelect: React.Dispatch<React.SetStateAction<TypeInWarehouseRes | null>>
+    setModalInfo: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default DetailProduct;

@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-import { ActionIcon, Button, Divider, Group, Image, NumberFormatter, Stack, Text } from "@mantine/core";
-import IconHeart from "@/assets/icon/heart_white.svg";
 
-import classes from "./style.module.css";
+import { Button, Divider, Group, NumberFormatter, Stack, Text } from "@mantine/core";
 import { DetailProductContext, TypeDetailProductContext } from "..";
 import { ProductModel, ProductObjectDefaultField } from "@/model/product";
 import { useAppDispatch } from "@/redux/hook";
@@ -12,6 +10,12 @@ import { ROUTER } from "@/constants/router";
 import { cache } from "@/utils/cache";
 import { WarehouseRes } from "@/dto/response/warehouse.response";
 import { TypeInWarehouseRes } from "@/dto/response/typeInWarehouse.response";
+
+import classes from "./style.module.css";
+import Cookies from "js-cookie";
+import { TOKEN_TYPE } from "@/model/variable";
+
+
 
 const DetailProductOrder: React.FC = () => {
     const {
@@ -24,6 +28,11 @@ const DetailProductOrder: React.FC = () => {
     const navigation = useNavigate();
 
     const handleOrder = () => {
+        if(!Cookies.get(TOKEN_TYPE.ACCESS_TOKEN)) {
+            navigation(ROUTER.LOGIN.href);
+            return;
+        }
+
         if (!product || !warehouse) {
             return
         }
@@ -61,9 +70,6 @@ const DetailProductOrder: React.FC = () => {
                 <Divider size="sm" orientation="vertical" />
                 <Group>
                     <Button onClick={handleOrder}>Mua</Button>
-                    <ActionIcon classNames={{ root: classes.icon_heart }}>
-                        <Image src={IconHeart} />
-                    </ActionIcon>
                 </Group>
             </Group>
         </Stack>

@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
                     </Grid>
                 </div>
                 <div className="f_end">
-                    <p>Copyright 2024 oquyshop.com</p>
+                    <p>Copyright 2024 h-shop.com</p>
                 </div>
             </footer>
         </Stack>

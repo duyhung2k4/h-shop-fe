@@ -32,6 +32,16 @@ export const endPoint = {
             url: "account/api/v1/protected/refresh-token",
             method: "POST",
             headers: HEADER.refreshTokenHeader(),
+        }),
+        getProfile: () => ({
+            url: "account/api/v1/public/profile",
+            method: "GET",
+            headers: HEADER.defaultHeader(),
+        }),
+        updateProfile: () => ({
+            url: "account/api/v1/protected/update-profile",
+            method: "POST",
+            headers: HEADER.refreshTokenHeader(),
         })
     },
     shop: {

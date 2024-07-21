@@ -4,6 +4,8 @@ import { LoadingOverlay } from "@mantine/core";
 import { useNavigate, useOutlet } from "react-router-dom";
 import { useRefreshTokenMutation } from "@/redux/api/auth.api";
 import { useAppSelector } from "@/redux/hook";
+import Cookies from "js-cookie";
+import { TOKEN_TYPE } from "@/model/variable";
 
 const ProtectedLayout: React.FC = () => {
   const outlet = useOutlet();
@@ -21,7 +23,9 @@ const ProtectedLayout: React.FC = () => {
   }
 
   useEffect(() => {
-    handleRefresh();
+    if(Cookies.get(TOKEN_TYPE.ACCESS_TOKEN)) {
+        handleRefresh();
+    }
   }, []);
 
   if(isLoading) {

@@ -24,3 +24,12 @@
     padding: 4px;
     border: 2px solid gray;
 }
+
+.header {
+    background-color: #000 !important;
+}
+
+.title {
+    color: #FFF;
+    font-weight: 600;
+}

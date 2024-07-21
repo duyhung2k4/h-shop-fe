@@ -5,6 +5,7 @@ import { QueryReturnType } from "@/dto/request/base.request";
 import { AuthResponse } from "@/dto/response/auth.response";
 import { LoginGoogleRequest } from "@/dto/request/auth.request";
 import { ROLE_APP } from "@/model/variable";
+import { ProfileModel } from "@/model/profile";
 
 export const authApi = createApi({
     reducerPath: "authApi",
@@ -24,6 +25,18 @@ export const authApi = createApi({
                 ...endPoint.auth.refreshToken(),
                 data: payload,
             }),
+        }),
+        getProfile: builder.query<QueryReturnType<ProfileModel>, number>({
+            query: (payload) => ({
+                ...endPoint.auth.getProfile(),
+                params: { id: payload }
+            }),
+        }),
+        updateProfile: builder.mutation<QueryReturnType<ProfileModel>, ProfileModel>({
+            query: (payload) => ({
+                ...endPoint.auth.updateProfile(),
+                data: payload,
+            }),
         })
     })
 });
@@ -31,4 +44,6 @@ export const authApi = createApi({
 export const {
     useLoginGoogleMutation,
     useRefreshTokenMutation,
+    useGetProfileQuery,
+    useUpdateProfileMutation,
 } = authApi;

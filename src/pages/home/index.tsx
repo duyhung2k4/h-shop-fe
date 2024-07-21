@@ -37,45 +37,6 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="feature">
-                <a href="" className="text-fea1">THÀNH VIÊN</a>
-                <a href="" className="text-fea2">Đây là thành viên của nhóm tôi</a>
-                <div className="cards-feature">
-                    <a href="">
-                        <div className="card">
-                            <div className="card-img"> <img src={logofeature} alt="" /></div>
-                            <div className="text-card">
-                                <p className="quality">Nguyễn Hưng</p>
-                                <p className="text-quality">
-                                    Đẹp trai - tài năng - tư duy đỉnh cao là những gì mà anh ấy có, quản lí các công việc trong team
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div className="card2">
-                            <div className="card-img"> <img src={logofeature} alt="" /></div>
-                            <div className="text-card">
-                                <p className="quality">Trọng Tấn</p>
-                                <p className="text-quality">
-                                    Thành viên cốt cán trong việc design và thiết kế, quản lí toàn bộ về hình ảnh sản phẩm
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div className="card">
-                            <div className="card-img"> <img src={logofeature} alt="" /></div>
-                            <div className="text-card">
-                                <p className="quality">Duy Hùng</p>
-                                <p className="text-quality">
-                                    Tay mơ - Tấu hài - Phân tích dữ liệu về thị trường cho sản phẩm
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
             <div className="video">
                 <div className="text-video">
                     <p className="text-vid1">VIDEO</p>

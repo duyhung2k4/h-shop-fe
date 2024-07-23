@@ -2,7 +2,6 @@ import { Group, Stack } from "@mantine/core";
 import React from "react";
 
 import anhgiay4 from "./image/anhgiay4.png"
-import logofeature from "./image/logofeature.png"
 import anhgiay5 from "./image/anhgiay5.png"
 import review_content from "./image/review_content.png"
 import logoavatar from "./image/logoavatar.png"
@@ -34,27 +33,6 @@ const Home: React.FC = () => {
                             <a href=""><button className="btn-addcart">Thêm</button></a>
                             <a href=""><button className="btn-shop">Xem ngay</button></a>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div className="video">
-                <div className="text-video">
-                    <p className="text-vid1">VIDEO</p>
-                    <p className="text-vid2">Giới thiệu về chúng tôi</p>
-                    <p className="text-vid3">
-                        Một clip ngắn về sự hình thành và phát triển của nhóm
-                    </p>
-                    <a href=""><button className="btn-learn">Xem thêm</button></a>
-                </div>
-                <div className="video-container">
-                    <div className="box-border">
-                    </div>
-                    <div className="main-video">
-                        <iframe width="380" height="280" src="https://www.youtube.com/embed/dUoRchsBt28?si=T8I9oZpDZCup5Nvs"
-                            frameBorder={0}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
                     </div>
                 </div>
             </div>

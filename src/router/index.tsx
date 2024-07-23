@@ -7,7 +7,6 @@ import AppshellLayout from "@/layout/appShell";
 import { Routes, Route } from "react-router-dom";
 
 import {
-    PageCart,
     PageDetailProduct,
     PageHeart,
     PageHome,
@@ -33,7 +32,6 @@ const AppRouter: React.FC = () => {
                         <Route path={ROUTER.SHOPPING.href} element={<PageShopping />} />
                         <Route path={ROUTER.PUCHASE_ORDER.href} element={<PagePuchaseOrder />} />
                         <Route path={ROUTER.HEART.href} element={<PageHeart/>} />
-                        <Route path={ROUTER.CART.href} element={<PageCart />} />
                     </Route>
                     <Route path={`${ROUTER.DETAIL_PRODUCT.href}/:id`} element={<PageDetailProduct />} />
                     <Route path={ROUTER.ORDER.href} element={<PageOrder />} />

@@ -75,7 +75,6 @@ const AppHeader: React.FC = () => {
             <Group classNames={{ root: classes.root }}>
                 {matches && <Group h="100%" w="100%" px="md" justify="space-between">
                     <Group>
-                        <Image src={IconDemon} height={30} width={30} />
                         <Text classNames={{ root: classes.title }}>H SHOP</Text>
                     </Group>
                     <Stack gap={30} h={"100%"} justify="center" style={{ overflow: "hidden" }}>
